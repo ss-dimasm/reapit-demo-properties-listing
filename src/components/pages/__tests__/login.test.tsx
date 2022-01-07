@@ -23,6 +23,8 @@ describe('loginHandler', () => {
 
     wrapper.find(Button).first().simulate('click')
 
-    expect(reapitConnectBrowserSession.connectLoginRedirect).toHaveBeenCalledTimes(1)
+    expect(
+      reapitConnectBrowserSession.connectLoginRedirect
+    ).toHaveBeenCalledTimes(1)
   })
 })

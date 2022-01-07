@@ -12,8 +12,12 @@ const mockConfigurationAppointments = [
 
 describe('configurationAppointmentsApiService', () => {
   it('should return a response from the config service', async () => {
-    mockedFetch.mockReturnValueOnce({ json: jest.fn(() => mockConfigurationAppointments) } as any)
-    expect(await configurationAppointmentsApiService(mockBrowserSession)).toEqual(mockConfigurationAppointments)
+    mockedFetch.mockReturnValueOnce({
+      json: jest.fn(() => mockConfigurationAppointments),
+    } as any)
+    expect(
+      await configurationAppointmentsApiService(mockBrowserSession)
+    ).toEqual(mockConfigurationAppointments)
     expect(mockedFetch).toHaveBeenCalledTimes(1)
   })
 
@@ -23,7 +27,7 @@ describe('configurationAppointmentsApiService', () => {
     await configurationAppointmentsApiService(mockBrowserSession)
     expect(errorSpy).toHaveBeenCalledWith(
       'Error fetching Configuration Appointment Types',
-      'No response returned by API',
+      'No response returned by API'
     )
   })
 })
