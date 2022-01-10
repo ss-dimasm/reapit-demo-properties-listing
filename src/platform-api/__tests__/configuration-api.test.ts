@@ -27,7 +27,7 @@ describe('configurationAppointmentsApiService', () => {
     await configurationAppointmentsApiService(mockBrowserSession)
     expect(errorSpy).toHaveBeenCalledWith(
       'Error fetching Configuration Appointment Types',
-      'No response returned by API'
+      new Error('No response returned by API')
     )
   })
 })

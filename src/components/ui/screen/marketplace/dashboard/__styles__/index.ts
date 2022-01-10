@@ -15,4 +15,6 @@ export const floatingButton = css`
 export const transparentBackground = css`
   background-color: transparent !important;
   border: none !important;
+  padding: 0 0 5px 0 !important;
+  justify-content: center;
 `
