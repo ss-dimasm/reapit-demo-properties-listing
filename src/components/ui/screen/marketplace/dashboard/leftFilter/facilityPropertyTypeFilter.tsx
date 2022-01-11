@@ -27,6 +27,21 @@ const FacilityPropertyTypeFilter: FC<FacilityPropertyTypeFilterType> = (
       max: maxBedroom,
     })
   }, [minBedroom, maxBedroom])
+
+  const setBedRoomCapacity = (
+    type: 'setMin' | 'setMax',
+    currentVal: number
+  ): void => {
+    switch (type) {
+      case 'setMin':
+        setMinBedroom(currentVal)
+        break
+      case 'setMax':
+        setMaxBedroom(currentVal)
+        break
+    }
+  }
+
   return (
     <>
       <Subtitle hasNoMargin className={whiteColor}>
@@ -56,8 +71,8 @@ const FacilityPropertyTypeFilter: FC<FacilityPropertyTypeFilterType> = (
                 min={0}
                 style={{ width: '100%' }}
                 placeholder="Min"
-                onKeyDown={(e) =>
-                  setMinBedroom(parseInt(e.currentTarget.value))
+                onKeyUp={(e) =>
+                  setBedRoomCapacity('setMin', parseInt(e.currentTarget.value))
                 }
               />
             </InputGroup>
@@ -77,8 +92,8 @@ const FacilityPropertyTypeFilter: FC<FacilityPropertyTypeFilterType> = (
                 min={0}
                 style={{ width: '100%' }}
                 placeholder="Max"
-                onKeyDown={(e) =>
-                  setMaxBedroom(parseInt(e.currentTarget.value))
+                onKeyUp={(e) =>
+                  setBedRoomCapacity('setMax', parseInt(e.currentTarget.value))
                 }
               />
             </InputGroup>

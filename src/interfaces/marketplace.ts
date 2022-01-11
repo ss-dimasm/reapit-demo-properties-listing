@@ -10,22 +10,42 @@ export type SelectedPropertyTypeType =
   | 'Town House'
   | 'Development Plot'
 
-export type SelectedLocalityType = 'rural' | 'village' | 'townCity' | undefined
+export type SelectedLocalityType = 'rural' | 'village' | 'townCity' | ''
 
 export interface PriceRangeTotalType {
-  min: number | undefined
-  max: number | undefined
+  min: number
+  max: number
 }
 
 export interface BedRoomTotalType {
-  min: number | undefined
-  max: number | undefined
+  min: number
+  max: number
 }
 
+export type MarketingModeFilterType = 'selling' | 'letting'
+
+export type SortByFilterType = '-created' | '-price' | '-bedrooms'
 export interface FilterComponentType {
-  changePropertyType: (property) => void
   selectedPropertyType: SelectedPropertyTypeType
+  changePropertyType: (property) => void
   changeLocalityType: (property) => void
   changePriceRange: (property) => void
   changeTotalBedRoom: (property) => void
+  clickedSearchButton: () => void
+}
+
+export interface PropertiesMarketPlaceListQuery {
+  propertyType: SelectedPropertyTypeType
+  locality: SelectedLocalityType
+  priceRange: {
+    min: number
+    max: number
+  }
+  bedRoom: {
+    min: number
+    max: number
+  }
+  marketingMode: MarketingModeFilterType
+  address: string
+  sortBy: SortByFilterType
 }

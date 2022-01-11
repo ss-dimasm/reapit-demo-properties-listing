@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { SecondaryNav } from '@reapit/elements'
 
-import FilterComponent from './filter'
+import FilterComponent from './leftFilter'
 import { FilterComponentType } from '../../../../../interfaces/marketplace'
 
 const LeftDashboardMarketPlace: FC<FilterComponentType> = (props) => {
@@ -11,6 +11,7 @@ const LeftDashboardMarketPlace: FC<FilterComponentType> = (props) => {
     changeLocalityType,
     changePriceRange,
     changeTotalBedRoom,
+    clickedSearchButton,
   } = props
 
   return (
@@ -22,6 +23,7 @@ const LeftDashboardMarketPlace: FC<FilterComponentType> = (props) => {
           changeLocalityType={changeLocalityType}
           changePriceRange={changePriceRange}
           changeTotalBedRoom={changeTotalBedRoom}
+          clickedSearchButton={clickedSearchButton}
         />
       </SecondaryNav>
     </>

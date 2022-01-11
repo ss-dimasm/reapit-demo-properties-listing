@@ -27,6 +27,20 @@ const PriceRangePropertyTypeFilter: FC<PriceRangePropertyTypeFilterType> = (
     })
   }, [minPrice, maxPrice])
 
+  const setPriceRange = (
+    type: 'setMin' | 'setMax',
+    currentVal: number
+  ): void => {
+    switch (type) {
+      case 'setMin':
+        setMinPrice(currentVal)
+        break
+      case 'setMax':
+        setMaxPrice(currentVal)
+        break
+    }
+  }
+
   return (
     <>
       <Subtitle hasNoMargin className={whiteColor}>
@@ -52,7 +66,9 @@ const PriceRangePropertyTypeFilter: FC<PriceRangePropertyTypeFilterType> = (
             min={0}
             style={{ width: '60%' }}
             placeholder="Minimum Price"
-            onKeyDown={(e) => setMinPrice(parseInt(e.currentTarget.value))}
+            onKeyUp={(e) =>
+              setPriceRange('setMin', parseInt(e.currentTarget.value))
+            }
           />
         </InputGroup>
         <InputGroup className="el-my3">
@@ -74,7 +90,9 @@ const PriceRangePropertyTypeFilter: FC<PriceRangePropertyTypeFilterType> = (
             min={0}
             style={{ width: '60%' }}
             placeholder="Maximum Price"
-            onKeyDown={(e) => setMaxPrice(parseInt(e.currentTarget.value))}
+            onKeyUp={(e) =>
+              setPriceRange('setMax', parseInt(e.currentTarget.value))
+            }
           />
         </InputGroup>
       </div>

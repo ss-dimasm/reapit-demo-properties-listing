@@ -15,6 +15,7 @@ const FilterComponent: FC<FilterComponentType> = (props) => {
     changeLocalityType,
     changePriceRange,
     changeTotalBedRoom,
+    clickedSearchButton,
   } = props
 
   return (
@@ -37,7 +38,7 @@ const FilterComponent: FC<FilterComponentType> = (props) => {
         </div>
         <FlexContainer isFlexJustifyBetween className="el-mt8">
           <Button>reset</Button>
-          <Button intent="critical" chevronRight>
+          <Button intent="critical" chevronRight onClick={clickedSearchButton}>
             Search
           </Button>
         </FlexContainer>

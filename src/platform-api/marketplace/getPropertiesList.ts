@@ -4,24 +4,8 @@ import { useQuery } from 'react-query'
 
 import { PagedResultPropertyModel } from '../../generated/graphql'
 import { BASE_HEADERS, URLS } from '../../constants/api'
+import { PropertiesMarketPlaceListQuery } from '../../interfaces/marketplace'
 
-import {
-  SelectedLocalityType,
-  SelectedPropertyTypeType,
-} from '../../interfaces/marketplace'
-
-export interface PropertiesMarketPlaceListQuery {
-  propertyType: SelectedPropertyTypeType
-  locality: SelectedLocalityType
-  priceRange: {
-    min: number | undefined
-    max: number | undefined
-  }
-  bedRoom: {
-    min: number | undefined
-    max: number | undefined
-  }
-}
 const getPropertiesList = async (
   session: ReapitConnectSession,
   query: PropertiesMarketPlaceListQuery
