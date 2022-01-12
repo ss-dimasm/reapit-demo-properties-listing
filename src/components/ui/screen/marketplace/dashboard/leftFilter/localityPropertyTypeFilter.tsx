@@ -29,9 +29,10 @@ const LocalityPropertyTypeFilter: FC<LocalityPropertyTypeFilterType> = (
             },
             {
               name: 'Town City',
-              value: 'town-city',
+              value: 'townCity',
             },
           ]}
+          defaultValue={['village']}
         />
       </div>
     </>

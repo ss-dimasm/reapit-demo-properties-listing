@@ -10,7 +10,7 @@ export type SelectedPropertyTypeType =
   | 'Town House'
   | 'Development Plot'
 
-export type SelectedLocalityType = 'rural' | 'village' | 'townCity' | ''
+export type SelectedLocalityType = 'rural' | 'village' | 'townCity'
 
 export interface PriceRangeTotalType {
   min: number
@@ -36,15 +36,9 @@ export interface FilterComponentType {
 
 export interface PropertiesMarketPlaceListQuery {
   propertyType: SelectedPropertyTypeType
-  locality: SelectedLocalityType
-  priceRange: {
-    min: number
-    max: number
-  }
-  bedRoom: {
-    min: number
-    max: number
-  }
+  locality: SelectedLocalityType | SelectedLocalityType[]
+  priceRange: PriceRangeTotalType
+  bedRoom: BedRoomTotalType
   marketingMode: MarketingModeFilterType
   address: string
   sortBy: SortByFilterType

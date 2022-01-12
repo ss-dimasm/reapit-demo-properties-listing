@@ -34,7 +34,7 @@ export const PrivateRouteWrapper: FC<PrivateRouteWrapperProps> = ({
     <MainContainer>
       <Nav />
       <PageContainer>
-        <PageContainer>
+        <PageContainer style={{ paddingTop: 0 }}>
           <Suspense fallback={<Loader label="Loading" fullPage />}>
             {children}
           </Suspense>

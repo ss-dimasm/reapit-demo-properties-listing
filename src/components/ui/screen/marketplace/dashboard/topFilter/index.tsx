@@ -5,6 +5,7 @@ import {
   MarketingModeFilterType,
   SortByFilterType,
 } from '../../../../../../interfaces/marketplace'
+import { positionSticky } from './index.style'
 
 interface TopFilterComponentType {
   changeMarketingMode: (marketingMode) => void
@@ -29,7 +30,11 @@ const TopFilterComponent: FC<TopFilterComponentType> = (
     changeSortBy(sortByType)
 
   return (
-    <FlexContainer isFlexJustifyBetween isFlexAlignCenter>
+    <FlexContainer
+      isFlexJustifyBetween
+      isFlexAlignCenter
+      className={positionSticky}
+    >
       <FlexContainer>
         <Select
           onChange={(e) =>

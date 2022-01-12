@@ -19,7 +19,7 @@ const FacilityPropertyTypeFilter: FC<FacilityPropertyTypeFilterType> = (
   const { changeTotalBedRoom } = props
 
   const [minBedroom, setMinBedroom] = useState<number>(0)
-  const [maxBedroom, setMaxBedroom] = useState<number>(0)
+  const [maxBedroom, setMaxBedroom] = useState<number>(100000)
 
   useEffect(() => {
     changeTotalBedRoom({

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
   CardBodyWrap,
   CardHeading,
@@ -19,7 +19,19 @@ import {
   CardWrap,
   Icon,
 } from '@reapit/elements'
-const PropertiesCardComponent = () => {
+import { PropertyModel } from '@reapit/foundations-ts-definitions'
+
+interface PropertiesCardComponentType {
+  propertyData: PropertyModel
+}
+
+const PropertiesCardComponent: FC<PropertiesCardComponentType> = (props) => {
+  const { propertyData } = props
+  console.log(propertyData)
+
+  /**
+   * @todo make style property card
+   */
   return (
     <div style={{ width: '49%' }} className="el-my5">
       <CardWrap>
@@ -28,7 +40,11 @@ const PropertiesCardComponent = () => {
             <img src="https://via.placeholder.com/52x52.svg" />
           </CardImageWrap>
           <CardHeadingWrap>
-            <CardHeading>Main Heading</CardHeading>
+            <CardHeading>
+              {propertyData.address?.buildingName !== ''
+                ? propertyData.address?.buildingName
+                : 'Unnamed Property'}
+            </CardHeading>
             <CardSubHeading>Sub Heading</CardSubHeading>
             <CardSubHeadingAdditional>
               Sub Heading Additional

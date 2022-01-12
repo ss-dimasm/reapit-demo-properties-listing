@@ -5,15 +5,20 @@ import { useQuery } from 'react-query'
 import { PagedResultPropertyModel } from '../../generated/graphql'
 import { BASE_HEADERS, URLS } from '../../constants/api'
 import { PropertiesMarketPlaceListQuery } from '../../interfaces/marketplace'
+import { separateLocality } from '../utils'
 
 const getPropertiesList = async (
   session: ReapitConnectSession,
   query: PropertiesMarketPlaceListQuery
 ): Promise<PagedResultPropertyModel[] | undefined> => {
   if (!session) return
-  const { propertyType, locality, priceRange, bedRoom } = query
+  const { propertyType, locality, priceRange, bedRoom, address } = query
+
+  // locality filter
+  const localityParams = separateLocality(locality)
+
   const { data } = await axios.get(
-    `${window.reapit.config.platformApiUrl}${URLS.PROPERTIES.PAGED}?pageSize=50&propertyType=${propertyType}&locality=${locality}&priceFrom=${priceRange.min}&priceTo=${priceRange.max}&bedroomsFrom=${bedRoom.min}&bedroomsTo=${bedRoom.max}`,
+    `${window.reapit.config.platformApiUrl}${URLS.PROPERTIES.PAGED}?pageSize=50&propertyType=${propertyType}${localityParams}&priceFrom=${priceRange.min}&priceTo=${priceRange.max}&bedroomsFrom=${bedRoom.min}&bedroomsTo=${bedRoom.max}&address=${address}`,
     {
       headers: {
         ...BASE_HEADERS,

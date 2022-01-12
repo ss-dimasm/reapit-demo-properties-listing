@@ -18,7 +18,7 @@ const PriceRangePropertyTypeFilter: FC<PriceRangePropertyTypeFilterType> = (
   const { changePriceRange } = props
 
   const [minPrice, setMinPrice] = useState<number>(0)
-  const [maxPrice, setMaxPrice] = useState<number>(0)
+  const [maxPrice, setMaxPrice] = useState<number>(150000000)
 
   useEffect(() => {
     changePriceRange({

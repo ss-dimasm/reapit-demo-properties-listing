@@ -20,7 +20,8 @@ import { useReapitConnect } from '@reapit/connect-session'
 import { reapitConnectBrowserSession } from '../../core/connect-session'
 import useGetPropertiesList from '../../platform-api/marketplace/getPropertiesList'
 
-const MarketPlace: FC<{}> = (): ReactElement => {
+type MarketPlaceType = {}
+const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
   const { connectSession } = useReapitConnect(reapitConnectBrowserSession)
 
   useEffect(() => {
@@ -31,11 +32,11 @@ const MarketPlace: FC<{}> = (): ReactElement => {
   const [selectedPropertyTypeFilter, setSelectedPropertyTypeFilter] =
     useState<SelectedPropertyTypeType>('House')
   const [selectedLocalityFilter, setSelectedLocalityFilter] =
-    useState<SelectedLocalityType>('')
+    useState<SelectedLocalityType>('village')
   const [decidedPriceRange, setDecidedPriceRange] =
-    useState<PriceRangeTotalType>({ min: 0, max: 15000000 })
+    useState<PriceRangeTotalType>({ min: 0, max: 150000000 })
   const [decidedTotalBedRooms, setDecidedTotalBedRooms] =
-    useState<BedRoomTotalType>({ min: 0, max: 15 })
+    useState<BedRoomTotalType>({ min: 0, max: 100000 })
 
   // top filter
   const [selectedMarketingModeFilter, setSelectedMarketingModeFilter] =
@@ -45,10 +46,20 @@ const MarketPlace: FC<{}> = (): ReactElement => {
   const [selectedSortByFilter, setSelectedSortByFilter] =
     useState<SortByFilterType>('-created')
 
+  // filter query template
+  const filter: PropertiesMarketPlaceListQuery = {
+    propertyType: selectedPropertyTypeFilter,
+    locality: selectedLocalityFilter,
+    priceRange: decidedPriceRange,
+    bedRoom: decidedTotalBedRooms,
+    marketingMode: selectedMarketingModeFilter,
+    address: decidedAddressPropertyFilter,
+    sortBy: selectedSortByFilter,
+  }
+
   // format filter
-  const [formattedQuery, setFormattedQuery] = useState<
-    PropertiesMarketPlaceListQuery | undefined
-  >()
+  const [formattedQuery, setFormattedQuery] =
+    useState<PropertiesMarketPlaceListQuery>(filter)
 
   // useEffect here (onClick Button, and OnChange in )
 
@@ -82,19 +93,10 @@ const MarketPlace: FC<{}> = (): ReactElement => {
 
   // handle button
   const clickedSearchButton = (): void => {
-    const filter: PropertiesMarketPlaceListQuery = {
-      propertyType: selectedPropertyTypeFilter,
-      locality: selectedLocalityFilter,
-      priceRange: decidedPriceRange,
-      bedRoom: decidedTotalBedRooms,
-      marketingMode: selectedMarketingModeFilter,
-      address: decidedAddressPropertyFilter,
-      sortBy: selectedSortByFilter,
-    }
     setFormattedQuery(filter)
   }
-  const { data } = useGetPropertiesList(connectSession!, formattedQuery!)
-  console.log(data)
+
+  const data = useGetPropertiesList(connectSession!, formattedQuery!)
 
   /**
    * @todo print search to JSON dummy data
@@ -117,6 +119,7 @@ const MarketPlace: FC<{}> = (): ReactElement => {
             changeAddressProperty={changeAddressProperty}
             changeMarketingMode={changeMarketingMode}
             changeSortBy={changeSortBy}
+            queryData={data}
           />
         </div>
       </FlexContainer>
