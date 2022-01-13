@@ -5,6 +5,7 @@ import { useQuery } from 'react-query'
 import { PagedResultPropertyModel } from '../../generated/graphql'
 import { BASE_HEADERS, URLS } from '../../constants/api'
 import { PropertiesMarketPlaceListQuery } from '../../interfaces/marketplace'
+
 import { separateLocality } from '../utils'
 
 const getPropertiesList = async (
@@ -12,13 +13,20 @@ const getPropertiesList = async (
   query: PropertiesMarketPlaceListQuery
 ): Promise<PagedResultPropertyModel[] | undefined> => {
   if (!session) return
-  const { propertyType, locality, priceRange, bedRoom, address } = query
+  const {
+    propertyType,
+    locality,
+    priceRange,
+    bedRoom,
+    address,
+    marketingMode,
+  } = query
 
   // locality filter
   const localityParams = separateLocality(locality)
 
   const { data } = await axios.get(
-    `${window.reapit.config.platformApiUrl}${URLS.PROPERTIES.PAGED}?pageSize=50&propertyType=${propertyType}${localityParams}&priceFrom=${priceRange.min}&priceTo=${priceRange.max}&bedroomsFrom=${bedRoom.min}&bedroomsTo=${bedRoom.max}&address=${address}`,
+    `${window.reapit.config.platformApiUrl}${URLS.PROPERTIES.PAGED}?pageSize=20&propertyType=${propertyType}${localityParams}&priceFrom=${priceRange.min}&priceTo=${priceRange.max}&bedroomsFrom=${bedRoom.min}&bedroomsTo=${bedRoom.max}&address=${address}&marketingMode=${marketingMode}`,
     {
       headers: {
         ...BASE_HEADERS,

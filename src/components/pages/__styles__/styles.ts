@@ -89,6 +89,9 @@ export const loginImages = css`
 export const leftSide = css`
   width: 20%;
 `
+export const centerSide = css`
+  width: 60%;
+`
 export const rightSide = css`
-  width: 78%;
+  width: 15%;
 `

@@ -33,7 +33,7 @@ export const PrivateRouteWrapper: FC<PrivateRouteWrapperProps> = ({
   return (
     <MainContainer>
       <Nav />
-      <PageContainer>
+      <PageContainer style={{ overflow: 'hidden' }}>
         <PageContainer style={{ paddingTop: 0 }}>
           <Suspense fallback={<Loader label="Loading" fullPage />}>
             {children}

@@ -1,0 +1,3 @@
+query GetPropertiesDataEachProperty($propertyId: String) {
+  Get
+}

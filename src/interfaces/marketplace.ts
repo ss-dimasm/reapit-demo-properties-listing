@@ -21,10 +21,16 @@ export interface BedRoomTotalType {
   min: number
   max: number
 }
-
-export type MarketingModeFilterType = 'selling' | 'letting'
+/**
+ * States Types of Marketing Mode in filter feature
+ */
+export type MarketingModeFilterType =
+  | 'selling'
+  | 'letting'
+  | 'sellingAndLetting'
 
 export type SortByFilterType = '-created' | '-price' | '-bedrooms'
+
 export interface FilterComponentType {
   selectedPropertyType: SelectedPropertyTypeType
   changePropertyType: (property) => void
@@ -42,4 +48,13 @@ export interface PropertiesMarketPlaceListQuery {
   marketingMode: MarketingModeFilterType
   address: string
   sortBy: SortByFilterType
+}
+
+/**
+ * Interface query in Marketplace first page
+ * @description to get properties image each property
+ */
+
+export interface PropertiesImagesMarketPlaceQuery {
+  propertyId: string
 }

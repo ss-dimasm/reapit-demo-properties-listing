@@ -1,8 +1,8 @@
 /* eslint-disable  */
 import React, { FC, ReactElement, useEffect, useState } from 'react'
-import { FlexContainer } from '@reapit/elements'
+import { FlexContainer, Title } from '@reapit/elements'
 
-import { leftSide, rightSide } from './__styles__/styles'
+import { centerSide, leftSide, rightSide } from './__styles__/styles'
 
 import LeftDashboardMarketPlace from '../ui/screen/marketplace/dashboard/leftDashboard'
 import RightDashboardMarketPlace from '../ui/screen/marketplace/dashboard/rightDashboard'
@@ -40,7 +40,7 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
 
   // top filter
   const [selectedMarketingModeFilter, setSelectedMarketingModeFilter] =
-    useState<MarketingModeFilterType>('letting')
+    useState<MarketingModeFilterType>('sellingAndLetting')
   const [decidedAddressPropertyFilter, setDecidedAddressPropertyFilter] =
     useState<string>('')
   const [selectedSortByFilter, setSelectedSortByFilter] =
@@ -114,13 +114,23 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
             clickedSearchButton={clickedSearchButton}
           />
         </div>
-        <div className={rightSide}>
+        <div className={centerSide}>
           <RightDashboardMarketPlace
             changeAddressProperty={changeAddressProperty}
             changeMarketingMode={changeMarketingMode}
             changeSortBy={changeSortBy}
             queryData={data}
           />
+        </div>
+        <div className={rightSide}>
+          <div style={{ position: 'sticky', top: 0 }}>
+            <Title hasCenteredText>
+              Advertisement Banner
+              <br />
+              <br />
+              Featured Property Listing
+            </Title>
+          </div>
         </div>
       </FlexContainer>
     </>

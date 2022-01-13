@@ -9,4 +9,7 @@ export const URLS = {
     PAGED: '/properties',
     SINGLE: '/properties/',
   },
+  PROPERTIES_IMAGE: {
+    PAGED: '/propertyImages',
+  },
 }
