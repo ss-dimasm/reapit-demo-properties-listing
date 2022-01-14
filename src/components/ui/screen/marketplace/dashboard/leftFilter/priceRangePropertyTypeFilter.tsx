@@ -7,11 +7,15 @@ import {
   Label,
   Subtitle,
 } from '@reapit/elements'
+import { Range } from 'rc-slider'
+
 import { whiteColor } from '../__styles__'
+import 'rc-slider/assets/index.css'
 
 interface PriceRangePropertyTypeFilterType {
   changePriceRange: (price) => void
 }
+
 const PriceRangePropertyTypeFilter: FC<PriceRangePropertyTypeFilterType> = (
   props
 ) => {
@@ -46,6 +50,13 @@ const PriceRangePropertyTypeFilter: FC<PriceRangePropertyTypeFilterType> = (
       <Subtitle hasNoMargin className={whiteColor}>
         Price Range
       </Subtitle>
+      <div className="el-mt3">
+        <Range
+          allowCross={true}
+          defaultValue={[30, 70]}
+          onChange={(value) => console.log(value)}
+        />
+      </div>
       <div className="el-mt3">
         <InputGroup className="el-my3">
           <Label

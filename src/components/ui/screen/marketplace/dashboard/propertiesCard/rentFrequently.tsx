@@ -5,14 +5,22 @@ import { rentFrequentlyFormatter } from '../../../../../utils'
 
 interface RentFrequentlyType {
   propertyData: PropertyModel
+  currentMarketingMode: boolean
 }
 const RentFrequently: FC<RentFrequentlyType> = (props) => {
-  const { propertyData } = props
+  const { propertyData, currentMarketingMode } = props
 
   // rent frequency
   const rentFrequency = rentFrequentlyFormatter(
     propertyData?.letting?.rentFrequency!
   )
+
+  if (
+    currentMarketingMode &&
+    propertyData?.marketingMode === 'sellingAndLetting'
+  )
+    return <div></div>
+
   return (
     <FlexContainer className="el-mb6">
       <div

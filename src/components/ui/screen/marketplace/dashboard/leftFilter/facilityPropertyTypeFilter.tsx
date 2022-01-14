@@ -1,12 +1,14 @@
+/* eslint-disable  */
+import React, { FC, useEffect, useState } from 'react'
+
 import {
   BodyText,
   FlexContainer,
-  Input,
-  InputGroup,
   Label,
+  Select,
   Subtitle,
 } from '@reapit/elements'
-import React, { FC, useEffect, useState } from 'react'
+
 import { BedRoomTotalType } from '../../../../../../interfaces/marketplace'
 import { typeTextDescription, whiteColor } from '../__styles__'
 
@@ -55,48 +57,26 @@ const FacilityPropertyTypeFilter: FC<FacilityPropertyTypeFilterType> = (
             </BodyText>
           </div>
           <FlexContainer isFlexJustifyBetween className="el-mt4">
-            <InputGroup style={{ width: '48%' }}>
-              <Label
-                style={{
-                  backgroundColor: 'transparent',
-                  fontWeight: '500',
-                  padding: '0',
-                }}
-                className={whiteColor}
-              >
-                Min
-              </Label>
-              <Input
-                type="num"
-                min={0}
-                style={{ width: '100%' }}
-                placeholder="Min"
-                onKeyUp={(e) =>
-                  setBedRoomCapacity('setMin', parseInt(e.currentTarget.value))
-                }
-              />
-            </InputGroup>
-            <InputGroup style={{ width: '48%' }}>
-              <Label
-                style={{
-                  backgroundColor: 'transparent',
-                  fontWeight: '500',
-                  padding: '0',
-                }}
-                className={whiteColor}
-              >
-                Max
-              </Label>
-              <Input
-                type="num"
-                min={0}
-                style={{ width: '100%' }}
-                placeholder="Max"
-                onKeyUp={(e) =>
-                  setBedRoomCapacity('setMax', parseInt(e.currentTarget.value))
-                }
-              />
-            </InputGroup>
+            <div style={{ width: '48%' }}>
+              <Label style={{ color: 'var(--color-white)' }}>Min</Label>
+              <Select style={{ width: '100%' }}>
+                <option value="0">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </Select>
+            </div>
+            <div style={{ width: '48%' }}>
+              <Label style={{ color: 'var(--color-white)' }}>Max</Label>
+              <Select style={{ width: '100%' }}>
+                <option value="9999999">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
+              </Select>
+            </div>
           </FlexContainer>
         </FlexContainer>
       </div>

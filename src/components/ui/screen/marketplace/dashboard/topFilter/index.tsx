@@ -12,6 +12,7 @@ interface TopFilterComponentType {
   changeAddressProperty: (marketingMode) => void
   changeSortBy: (marketingMode) => void
 }
+
 const TopFilterComponent: FC<TopFilterComponentType> = (
   props
 ): ReactElement => {
@@ -41,7 +42,7 @@ const TopFilterComponent: FC<TopFilterComponentType> = (
             setMarketingMode(e.currentTarget.value as MarketingModeFilterType)
           }
         >
-          <option value="sellingAndLetting">Any</option>
+          <option value="sellingAndLetting">Rent/Buy</option>
           <option value="letting">Rent</option>
           <option value="selling">Buy</option>
         </Select>

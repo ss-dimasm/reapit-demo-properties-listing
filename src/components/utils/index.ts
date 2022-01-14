@@ -2,7 +2,9 @@ import {
   PropertyModel,
   PropertyModeLetting,
   PropertyModelInternalArea,
+  PropertyModelSelling,
 } from '../../generated/graphql'
+import { DefinedPropertyStatusType } from '../../interfaces/marketplace'
 
 /**
  * Compile address
@@ -31,6 +33,19 @@ export const formatMarketingModeProperty = (
 }
 
 /**
+ * Only used when marketingMode from PropertyModel is sellingAndLetting
+ * Used for changing between rent and sell mode
+ * @param isCurrentlySelling
+ * @returns
+ */
+export const formatMarketingModeIsSellingAndLettingProperty = (
+  isCurrentlySelling: boolean
+): string => {
+  if (isCurrentlySelling) return 'Selling Mode'
+
+  return 'Renting Mode'
+}
+/**
  * Choosing Color based marketing mode in properties
  * @param marketingMode
  * @returns
@@ -40,54 +55,105 @@ export const marketingModeColorTheme = (
 ): string => {
   switch (marketingMode) {
     case 'selling':
-      return 'var(--intent-critical)'
+      return 'var(--color-blue-dark2)'
     case 'letting':
-      return 'var(--intent-secondary)'
+      return 'var(--color-blue-dark2)'
     default:
-      return 'var(--intent-success)'
+      return 'var(--color-blue-dark2)'
+  }
+}
+
+/**
+ * Formatted Selling Status
+ * @param sellingStatus
+ * @returns string
+ */
+export const formatSellingStatus = (
+  sellingStatus: PropertyModelSelling['status']
+): DefinedPropertyStatusType => {
+  switch (sellingStatus) {
+    case 'preAppraisal':
+      return { name: 'Pre Appraisal', color: 'low' }
+    case 'valuation':
+      return { name: 'Valuation', color: 'low' }
+    case 'paidValuation':
+      return { name: 'Paid Valuation', color: 'low' }
+    case 'forSale':
+      return { name: 'For Sale', color: 'success' }
+    case 'underOffer':
+      return { name: 'Under Offer', color: 'low' }
+    case 'reserved':
+      return { name: 'Reserved', color: 'low' }
+    case 'exchanged':
+      return { name: 'Exchanged', color: 'low' }
+    case 'completed':
+      return { name: 'Completed', color: 'low' }
+    case 'soldExternally':
+      return { name: 'Sold Externally', color: 'low' }
+    case 'withdrawn':
+      return { name: 'Withdrawn', color: 'danger' }
+    default:
+      return { name: 'Unavailable', color: 'low' }
   }
 }
 
 /**
  * Formatted Letting Status
+ * @param lettingStatus
+ * @returns string
  */
+
 export const formatLettingStatus = (
   lettingStatus: PropertyModeLetting['status']
-): string => {
+): DefinedPropertyStatusType => {
   switch (lettingStatus) {
     case 'valuation':
-      return 'Valuation'
+      return { name: 'Valuation', color: 'low' }
     case 'toLet':
-      return 'To Let'
+      return { name: 'To Let', color: 'success' }
     case 'toLetUnavailable':
-      return 'To Let is Unavailable'
+      return { name: 'To Let is Unavailable', color: 'low' }
     case 'underOffer':
-      return 'Under Offer'
-    case 'underOfferUnavailable':
-      return 'Under Offer is Unavailable'
+      return { name: 'Under Offer', color: 'low' }
     case 'arrangingTenancy':
-      return 'Arranging Tenancy'
+      return { name: 'Arranging Tenancy', color: 'low' }
     case 'tenancyCurrent':
-      return 'Current Tenancy'
+      return { name: 'Current Tenancy', color: 'low' }
     case 'tenancyFinished':
-      return 'Tenancy Finished'
+      return { name: 'Tenancy Finished', color: 'success' }
     case 'tenancyCancelled':
-      return 'Tenancy Cancelled'
+      return { name: 'Tenancy Cancelled', color: 'low' }
     case 'sold':
-      return 'Sold'
+      return { name: 'Sold', color: 'danger' }
     case 'letByOtherAgent':
-      return 'Let By Other Agent'
+      return { name: 'Let By Other Agent', color: 'low' }
     case 'letPrivately':
-      return 'Let Privately'
+      return { name: 'Let Privately', color: 'low' }
     case 'provisional':
-      return 'Provisional'
+      return { name: 'Provisional', color: 'low' }
     case 'withdrawn':
-      return 'Withdrawn'
+      return { name: 'Withdrawn', color: 'danger' }
     default:
-      return 'Unavailable'
+      return { name: 'Unavailable', color: 'danger' }
   }
 }
 
+export const definedPropertyStatus = (
+  marketingMode: PropertyModel['marketingMode'],
+  propertyLettingStatus: string,
+  propertySellingStatus: string,
+  isSelling?: boolean
+): DefinedPropertyStatusType => {
+  switch (marketingMode) {
+    case 'selling':
+      return formatSellingStatus(propertySellingStatus)
+    case 'letting':
+      return formatLettingStatus(propertyLettingStatus)
+    default:
+      if (isSelling) return formatSellingStatus(propertySellingStatus)
+      return formatLettingStatus(propertyLettingStatus)
+  }
+}
 /**
  * Price Formatting
  * Convert number to thousand digit with dot every 3
@@ -121,6 +187,7 @@ export const squareFeetFormatter = (
 ): string => {
   if (!internalArea || !internalArea.min || !internalArea.max)
     return 'Unprovided Data'
+
   const { min, max } = internalArea
 
   return `${min} - ${max}`

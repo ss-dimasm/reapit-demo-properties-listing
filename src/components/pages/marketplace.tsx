@@ -1,4 +1,3 @@
-/* eslint-disable  */
 import React, { FC, ReactElement, useEffect, useState } from 'react'
 import { FlexContainer, Title } from '@reapit/elements'
 
@@ -57,11 +56,11 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
     sortBy: selectedSortByFilter,
   }
 
+  // useEffect here (onClick Button, and OnChange )
+
   // format filter
   const [formattedQuery, setFormattedQuery] =
     useState<PropertiesMarketPlaceListQuery>(filter)
-
-  // useEffect here (onClick Button, and OnChange in )
 
   // change property type function
   const changePropertyType = (propertyType: SelectedPropertyTypeType): void =>

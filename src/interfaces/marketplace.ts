@@ -1,3 +1,5 @@
+import { Intent } from '@reapit/elements'
+
 export type SelectedPropertyTypeType =
   | 'House'
   | 'Bungalow'
@@ -57,4 +59,13 @@ export interface PropertiesMarketPlaceListQuery {
 
 export interface PropertiesImagesMarketPlaceQuery {
   propertyId: string
+}
+
+/**
+ * Property Status Type
+ * Formatting property status indicator
+ */
+export interface DefinedPropertyStatusType {
+  name: string
+  color: Intent | undefined
 }

@@ -6,15 +6,15 @@ const AgentProperty = () => {
     <div
       style={{
         position: 'absolute',
-        top: '-50px',
+        top: '-40px',
         left: '15%',
       }}
     >
       <img
         src="https://www.biowritingservice.com/wp-content/themes/tuborg/images/Executive%20Bio%20Sample%20Photo.png"
         style={{
-          width: '75px',
-          height: '75px',
+          width: '5rem',
+          height: '5rem',
           borderRadius: '50%',
           objectFit: 'cover',
         }}
