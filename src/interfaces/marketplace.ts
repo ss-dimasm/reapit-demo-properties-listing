@@ -35,16 +35,20 @@ export type SortByFilterType = '-created' | '-price' | '-bedrooms'
 
 export interface FilterComponentType {
   selectedPropertyType: SelectedPropertyTypeType
-  changePropertyType: (property) => void
-  changeLocalityType: (property) => void
-  changePriceRange: (property) => void
-  changeTotalBedRoom: (property) => void
+  marketingMode: MarketingModeFilterType
+  priceType: Exclude<MarketingModeFilterType, 'sellingAndLetting'>
+  changePropertyType: (property: SelectedPropertyTypeType) => void
+  changeLocalityType: (property: SelectedLocalityType) => void
+  changePriceType: (priceType: FilterComponentType['priceType']) => void
+  changePriceRange: (property: PriceRangeTotalType) => void
+  changeTotalBedRoom: (property: BedRoomTotalType) => void
   clickedSearchButton: () => void
 }
 
 export interface PropertiesMarketPlaceListQuery {
   propertyType: SelectedPropertyTypeType
   locality: SelectedLocalityType | SelectedLocalityType[]
+  priceType: Exclude<MarketingModeFilterType, 'sellingAndLetting'>
   priceRange: PriceRangeTotalType
   bedRoom: BedRoomTotalType
   marketingMode: MarketingModeFilterType

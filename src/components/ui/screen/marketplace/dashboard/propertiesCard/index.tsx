@@ -9,8 +9,11 @@ import FacilityProperty from './facilityProperty'
 import TitleCardProperty from './titleCardProperty'
 import StatusProperty from './statusProperty'
 
+import type { MarketingModeFilterType } from '../../../../../../interfaces/marketplace'
+
 interface PropertiesCardComponentType {
   propertyData: PropertyModel
+  priceType: Exclude<MarketingModeFilterType, 'sellingAndLetting'>
 }
 
 const PropertiesCardComponent: FC<PropertiesCardComponentType> = (props) => {
@@ -19,7 +22,7 @@ const PropertiesCardComponent: FC<PropertiesCardComponentType> = (props) => {
    * which is have sellingAndLetting value in marketing mode
    */
   const [isMarketingModeEqualToSelling, setIsMarketingModeEqualToSelling] =
-    useState<boolean>(true)
+    useState<boolean>(props.priceType === 'selling' ? true : false)
 
   const toggleMarketingMode = (mode: boolean): void =>
     setIsMarketingModeEqualToSelling(mode)

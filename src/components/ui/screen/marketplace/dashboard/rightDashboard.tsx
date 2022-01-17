@@ -13,11 +13,16 @@ import {
   PropertyModel,
   PropertyModelPagedResult,
 } from '@reapit/foundations-ts-definitions'
+import {
+  MarketingModeFilterType,
+  SortByFilterType,
+} from '../../../../../interfaces/marketplace'
 
 interface RightDashboardMarketPlaceType {
-  changeMarketingMode: (marketingMode) => void
-  changeAddressProperty: (marketingMode) => void
-  changeSortBy: (marketingMode) => void
+  changeMarketingMode: (marketingMode: MarketingModeFilterType) => void
+  changeAddressProperty: (marketingMode: string) => void
+  changeSortBy: (sortBy: SortByFilterType) => void
+  priceType: Exclude<MarketingModeFilterType, 'sellingAndLetting'>
   queryData: UseQueryResult<PagedResultPropertyModel[] | undefined, unknown>
 }
 
@@ -25,6 +30,7 @@ const RightDashboardMarketPlace: FC<RightDashboardMarketPlaceType> = (
   props
 ): ReactElement => {
   const {
+    priceType,
     changeAddressProperty,
     changeSortBy,
     changeMarketingMode,
@@ -32,6 +38,8 @@ const RightDashboardMarketPlace: FC<RightDashboardMarketPlaceType> = (
   } = props
 
   const { isLoading } = queryData
+
+  // while is fetching or query data does not exits, return loading indicator
   if (isLoading || !queryData.data) {
     return (
       <>
@@ -59,6 +67,7 @@ const RightDashboardMarketPlace: FC<RightDashboardMarketPlaceType> = (
           data._embedded.map((property: PropertyModel) => {
             return (
               <PropertiesCardComponent
+                priceType={priceType}
                 propertyData={property}
                 key={property.id}
               />

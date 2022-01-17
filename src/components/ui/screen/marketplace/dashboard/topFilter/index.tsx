@@ -60,7 +60,7 @@ const TopFilterComponent: FC<TopFilterComponentType> = (
             setSortByFilter(e.currentTarget.value as SortByFilterType)
           }
         >
-          <option value="latest">Latest</option>
+          <option value="created">Latest</option>
           <option value="bedrooms">Bedrooms</option>
           <option value="price">Price</option>
         </Select>

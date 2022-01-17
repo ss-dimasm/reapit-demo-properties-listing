@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import { CardListItemTextSecondary, StatusIndicator } from '@reapit/elements'
 import { PropertyModel } from '@reapit/foundations-ts-definitions'
 import { definedPropertyStatus } from '../../../../../utils'
+import { MarketingModeFilterType } from '../../../../../../interfaces/marketplace'
 
 interface StatusPropertyType {
   propertyData: PropertyModel
@@ -12,7 +13,7 @@ const StatusProperty: FC<StatusPropertyType> = (props) => {
   const { propertyData, currentMarketingMode } = props
 
   const propertyStatus = definedPropertyStatus(
-    propertyData?.marketingMode,
+    propertyData?.marketingMode as MarketingModeFilterType,
     propertyData?.letting?.status!,
     propertyData?.selling?.status!,
     currentMarketingMode!

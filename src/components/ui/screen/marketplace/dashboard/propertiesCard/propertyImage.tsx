@@ -13,6 +13,7 @@ import { useReapitConnect } from '@reapit/connect-session'
 import { reapitConnectBrowserSession } from '../../../../../../core/connect-session'
 
 import { HiSwitchHorizontal } from 'react-icons/hi'
+import { MarketingModeFilterType } from '../../../../../../interfaces/marketplace'
 interface PropertyImageType {
   propertyData: PropertyModel
   currentMarketingMode: boolean
@@ -35,10 +36,12 @@ const PropertyImage: FC<PropertyImageType> = (props) => {
   }
 
   const statusMarketing = formatMarketingModeProperty(
-    propertyData?.marketingMode
+    propertyData?.marketingMode as MarketingModeFilterType
   )
 
-  const colorTheme = marketingModeColorTheme(propertyData?.marketingMode)
+  const colorTheme = marketingModeColorTheme(
+    propertyData?.marketingMode as MarketingModeFilterType
+  )
 
   // const { data } = useGetPropertiesImageEachProperty(connectSession!, {
   //   propertyId: propertyData.id!,

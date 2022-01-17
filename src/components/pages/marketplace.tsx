@@ -1,12 +1,16 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react'
-import { FlexContainer, Title } from '@reapit/elements'
+
+import { FlexContainer, Subtitle } from '@reapit/elements'
+import { useReapitConnect } from '@reapit/connect-session'
+import { reapitConnectBrowserSession } from '../../core/connect-session'
 
 import { centerSide, leftSide, rightSide } from './__styles__/styles'
 
 import LeftDashboardMarketPlace from '../ui/screen/marketplace/dashboard/leftDashboard'
 import RightDashboardMarketPlace from '../ui/screen/marketplace/dashboard/rightDashboard'
+import ChatButton from '../ui/screen/marketplace/dashboard/chatButton'
 
-import {
+import type {
   BedRoomTotalType,
   PriceRangeTotalType,
   SelectedLocalityType,
@@ -15,8 +19,6 @@ import {
   SortByFilterType,
   PropertiesMarketPlaceListQuery,
 } from '../../interfaces/marketplace'
-import { useReapitConnect } from '@reapit/connect-session'
-import { reapitConnectBrowserSession } from '../../core/connect-session'
 import useGetPropertiesList from '../../platform-api/marketplace/getPropertiesList'
 
 type MarketPlaceType = {}
@@ -34,6 +36,8 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
     useState<SelectedLocalityType>('village')
   const [decidedPriceRange, setDecidedPriceRange] =
     useState<PriceRangeTotalType>({ min: 0, max: 150000000 })
+  const [selectedPriceRangeType, setSelectedPriceRangeType] =
+    useState<Exclude<MarketingModeFilterType, 'sellingAndLetting'>>('selling')
   const [decidedTotalBedRooms, setDecidedTotalBedRooms] =
     useState<BedRoomTotalType>({ min: 0, max: 100000 })
 
@@ -49,6 +53,7 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
   const filter: PropertiesMarketPlaceListQuery = {
     propertyType: selectedPropertyTypeFilter,
     locality: selectedLocalityFilter,
+    priceType: selectedPriceRangeType,
     priceRange: decidedPriceRange,
     bedRoom: decidedTotalBedRooms,
     marketingMode: selectedMarketingModeFilter,
@@ -70,6 +75,11 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
   const changeLocalityType = (localityType: SelectedLocalityType): void =>
     setSelectedLocalityFilter(localityType)
 
+  // change price type
+  const changePriceType = (
+    priceType: Exclude<MarketingModeFilterType, 'sellingAndLetting'>
+  ) => setSelectedPriceRangeType(priceType)
+
   // change price range
   const changePriceRange = (priceRange: PriceRangeTotalType): void =>
     setDecidedPriceRange(priceRange)
@@ -79,8 +89,12 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
     setDecidedTotalBedRooms(bedRoom)
 
   // change marketingMode
-  const changeMarketingMode = (marketingMode: MarketingModeFilterType): void =>
+  const changeMarketingMode = (
+    marketingMode: MarketingModeFilterType
+  ): void => {
+    setSelectedPriceRangeType('selling') // reset state
     setSelectedMarketingModeFilter(marketingMode)
+  }
 
   // change address
   const changeAddressProperty = (currentAddress: string): void =>
@@ -97,17 +111,17 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
 
   const data = useGetPropertiesList(connectSession!, formattedQuery!)
 
-  /**
-   * @todo print search to JSON dummy data
-   */
   return (
-    <>
-      <FlexContainer isFlexJustifyBetween>
+    <div>
+      <FlexContainer isFlexJustifyBetween style={{ position: 'relative' }}>
         <div className={leftSide}>
           <LeftDashboardMarketPlace
+            marketingMode={selectedMarketingModeFilter}
             selectedPropertyType={selectedPropertyTypeFilter}
+            priceType={selectedPriceRangeType}
             changePropertyType={changePropertyType}
             changeLocalityType={changeLocalityType}
+            changePriceType={changePriceType}
             changePriceRange={changePriceRange}
             changeTotalBedRoom={changeTotalBedRoom}
             clickedSearchButton={clickedSearchButton}
@@ -115,24 +129,21 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
         </div>
         <div className={centerSide}>
           <RightDashboardMarketPlace
+            priceType={selectedPriceRangeType}
+            queryData={data}
             changeAddressProperty={changeAddressProperty}
             changeMarketingMode={changeMarketingMode}
             changeSortBy={changeSortBy}
-            queryData={data}
           />
         </div>
         <div className={rightSide}>
           <div style={{ position: 'sticky', top: 0 }}>
-            <Title hasCenteredText>
-              Advertisement Banner
-              <br />
-              <br />
-              Featured Property Listing
-            </Title>
+            <Subtitle hasCenteredText>Specific Filters Feature (soon)</Subtitle>
           </div>
         </div>
       </FlexContainer>
-    </>
+      <ChatButton />
+    </div>
   )
 }
 

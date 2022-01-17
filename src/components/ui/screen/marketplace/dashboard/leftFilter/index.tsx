@@ -10,9 +10,12 @@ import { FilterComponentType } from '../../../../../../interfaces/marketplace'
 
 const FilterComponent: FC<FilterComponentType> = (props) => {
   const {
+    marketingMode,
     selectedPropertyType,
+    priceType,
     changePropertyType,
     changeLocalityType,
+    changePriceType,
     changePriceRange,
     changeTotalBedRoom,
     clickedSearchButton,
@@ -31,7 +34,12 @@ const FilterComponent: FC<FilterComponentType> = (props) => {
           <LocalityPropertyTypeFilter changeLocalityType={changeLocalityType} />
         </div>
         <div className="el-my6">
-          <PriceRangePropertyTypeFilter changePriceRange={changePriceRange} />
+          <PriceRangePropertyTypeFilter
+            marketingMode={marketingMode}
+            priceType={priceType}
+            changePriceType={changePriceType}
+            changePriceRange={changePriceRange}
+          />
         </div>
         <div className="el-my6">
           <FacilityPropertyTypeFilter changeTotalBedRoom={changeTotalBedRoom} />

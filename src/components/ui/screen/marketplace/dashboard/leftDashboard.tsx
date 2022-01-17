@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { SecondaryNav } from '@reapit/elements'
 
 import FilterComponent from './leftFilter'
-import { FilterComponentType } from '../../../../../interfaces/marketplace'
+import type { FilterComponentType } from '../../../../../interfaces/marketplace'
 
 const LeftDashboardMarketPlace: FC<FilterComponentType> = (props) => {
   return (

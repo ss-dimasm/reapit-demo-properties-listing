@@ -94,4 +94,5 @@ export const centerSide = css`
 `
 export const rightSide = css`
   width: 15%;
+  position: relative;
 `

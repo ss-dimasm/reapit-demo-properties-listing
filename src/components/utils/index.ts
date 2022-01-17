@@ -4,7 +4,11 @@ import {
   PropertyModelInternalArea,
   PropertyModelSelling,
 } from '../../generated/graphql'
-import { DefinedPropertyStatusType } from '../../interfaces/marketplace'
+import {
+  DefinedPropertyStatusType,
+  MarketingModeFilterType,
+  PriceRangeTotalType,
+} from '../../interfaces/marketplace'
 
 /**
  * Compile address
@@ -20,7 +24,7 @@ export const getPropertyAddress = (
  * Marketing Mode format
  */
 export const formatMarketingModeProperty = (
-  marketingMode: PropertyModel['marketingMode']
+  marketingMode: MarketingModeFilterType
 ): string => {
   switch (marketingMode) {
     case 'selling':
@@ -51,7 +55,7 @@ export const formatMarketingModeIsSellingAndLettingProperty = (
  * @returns
  */
 export const marketingModeColorTheme = (
-  marketingMode: PropertyModel['marketingMode']
+  marketingMode: MarketingModeFilterType
 ): string => {
   switch (marketingMode) {
     case 'selling':
@@ -139,7 +143,7 @@ export const formatLettingStatus = (
 }
 
 export const definedPropertyStatus = (
-  marketingMode: PropertyModel['marketingMode'],
+  marketingMode: MarketingModeFilterType,
   propertyLettingStatus: string,
   propertySellingStatus: string,
   isSelling?: boolean
@@ -182,6 +186,11 @@ export const rentFrequentlyFormatter = (
   }
 }
 
+/**
+ * Return Square Feet formatter from subfield of PropertyModelInternalArea
+ * @param internalArea
+ * @returns string
+ */
 export const squareFeetFormatter = (
   internalArea: PropertyModelInternalArea
 ): string => {
@@ -191,4 +200,20 @@ export const squareFeetFormatter = (
   const { min, max } = internalArea
 
   return `${min} - ${max}`
+}
+
+/**
+ * Set up min and max value in Price Range Filter Feature
+ * @param marketingMode
+ * @returns PriceRangeTotalType
+ */
+export const setPriceRangeValue = (
+  marketingMode: MarketingModeFilterType
+): PriceRangeTotalType => {
+  switch (marketingMode) {
+    case 'letting':
+      return { min: 0, max: 2500 }
+    default:
+      return { min: 0, max: 550000 }
+  }
 }

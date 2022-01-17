@@ -6,7 +6,7 @@ import { PagedResultPropertyModel } from '../../generated/graphql'
 import { BASE_HEADERS, URLS } from '../../constants/api'
 import { PropertiesMarketPlaceListQuery } from '../../interfaces/marketplace'
 
-import { separateLocality } from '../utils'
+import { considerPriceMarketingMode, separateLocality } from '../utils'
 
 const getPropertiesList = async (
   session: ReapitConnectSession,
@@ -16,17 +16,27 @@ const getPropertiesList = async (
   const {
     propertyType,
     locality,
+    priceType,
     priceRange,
     bedRoom,
     address,
     marketingMode,
+    sortBy,
   } = query
 
   // locality filter
   const localityParams = separateLocality(locality)
 
+  // price params
+  const priceParams = considerPriceMarketingMode(
+    marketingMode,
+    priceRange,
+    priceType
+  )
+
+  console.log(priceParams)
   const { data } = await axios.get(
-    `${window.reapit.config.platformApiUrl}${URLS.PROPERTIES.PAGED}?pageSize=20&propertyType=${propertyType}${localityParams}&priceFrom=${priceRange.min}&priceTo=${priceRange.max}&bedroomsFrom=${bedRoom.min}&bedroomsTo=${bedRoom.max}&address=${address}&marketingMode=${marketingMode}`,
+    `${window.reapit.config.platformApiUrl}${URLS.PROPERTIES.PAGED}?pageSize=20&propertyType=${propertyType}${localityParams}${priceParams}&bedroomsFrom=${bedRoom.min}&bedroomsTo=${bedRoom.max}&address=${address}&marketingMode=${marketingMode}&sortBy=${sortBy}`,
     {
       headers: {
         ...BASE_HEADERS,
