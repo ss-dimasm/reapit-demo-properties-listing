@@ -1,3 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login should match a snapshot 1`] = `ShallowWrapper {}`;
+exports[`Login should match a snapshot 1`] = `
+<div
+  className=""
+>
+  <div
+    className=""
+  >
+    <div
+      className=""
+    >
+      <img
+        alt="login graphic"
+        src="step-1.svg"
+      />
+      <img
+        alt="login graphic"
+        src="step-2.svg"
+      />
+      <img
+        alt="login graphic"
+        src="step-3.svg"
+      />
+    </div>
+  </div>
+  <div
+    className=""
+  >
+    <Component>
+      <img
+        alt="Reapit Connect Graphic"
+        src="reapit-connect.png"
+      />
+    </Component>
+    <Component
+      className=""
+    >
+      <He
+        disabled={false}
+        fullWidth={true}
+        intent="primary"
+        loading={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Login
+      </He>
+    </Component>
+    <Component
+      isFlexAlignCenter={true}
+      isFlexJustifyCenter={true}
+    />
+  </div>
+</div>
+`;

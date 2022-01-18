@@ -18,6 +18,10 @@ export interface PriceRangeTotalType {
   min: number
   max: number
 }
+export interface PriceIntegerRangeTotalType {
+  min: string
+  max: string
+}
 
 export interface BedRoomTotalType {
   min: number

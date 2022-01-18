@@ -1,3 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App should match a snapshot 1`] = `ShallowWrapper {}`;
+exports[`App should match a snapshot 1`] = `
+<ErrorBoundary>
+  <QueryClientProvider
+    client={
+      QueryClient {
+        "defaultOptions": Object {},
+        "mutationCache": MutationCache {
+          "config": Object {},
+          "listeners": Array [],
+          "mutationId": 0,
+          "mutations": Array [],
+        },
+        "mutationDefaults": Array [],
+        "queryCache": QueryCache {
+          "config": Object {},
+          "listeners": Array [],
+          "queries": Array [],
+          "queriesMap": Object {},
+        },
+        "queryDefaults": Array [],
+        "unsubscribeFocus": [Function],
+        "unsubscribeOnline": [Function],
+      }
+    }
+  >
+    <Component>
+      <Component>
+        <Router />
+      </Component>
+    </Component>
+    <ReactQueryDevtools
+      initialIsOpen={false}
+    />
+  </QueryClientProvider>
+</ErrorBoundary>
+`;

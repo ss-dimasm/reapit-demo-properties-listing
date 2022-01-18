@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Left bar should render <LeftDashboard/> 1`] = `""`;
+
+exports[`Leftbar should render <LeftDashboard/> 1`] = `""`;

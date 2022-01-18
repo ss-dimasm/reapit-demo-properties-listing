@@ -90,7 +90,7 @@ export const leftSide = css`
   width: 20%;
 `
 export const centerSide = css`
-  width: 60%;
+  width: 78%;
 `
 export const rightSide = css`
   width: 15%;

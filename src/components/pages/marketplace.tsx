@@ -1,10 +1,10 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react'
 
-import { FlexContainer, Subtitle } from '@reapit/elements'
+import { FlexContainer } from '@reapit/elements'
 import { useReapitConnect } from '@reapit/connect-session'
 import { reapitConnectBrowserSession } from '../../core/connect-session'
 
-import { centerSide, leftSide, rightSide } from './__styles__/styles'
+import { centerSide, leftSide } from './__styles__/styles'
 
 import LeftDashboardMarketPlace from '../ui/screen/marketplace/dashboard/leftDashboard'
 import RightDashboardMarketPlace from '../ui/screen/marketplace/dashboard/rightDashboard'
@@ -135,11 +135,6 @@ const MarketPlace: FC<MarketPlaceType> = (): ReactElement => {
             changeMarketingMode={changeMarketingMode}
             changeSortBy={changeSortBy}
           />
-        </div>
-        <div className={rightSide}>
-          <div style={{ position: 'sticky', top: 0 }}>
-            <Subtitle hasCenteredText>Specific Filters Feature (soon)</Subtitle>
-          </div>
         </div>
       </FlexContainer>
       <ChatButton />
