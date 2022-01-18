@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 
 import { FlexContainer } from '@reapit/elements'
 import { PropertyModel } from '@reapit/foundations-ts-definitions'
+import { useHistory } from 'react-router-dom'
 
 import PropertyImage from './propertyImage'
 import AgentProperty from './agentProperty'
@@ -33,6 +34,9 @@ const PropertiesCardComponent: FC<PropertiesCardComponentType> = (props) => {
   const cardNotOnHover: React.MouseEventHandler<HTMLDivElement> = (e) =>
     e.currentTarget.removeAttribute('style')
 
+  // jump to property page
+  const history = useHistory()
+
   return (
     <div style={{ width: '49%', cursor: 'pointer' }} className="el-my4">
       <div
@@ -40,6 +44,7 @@ const PropertiesCardComponent: FC<PropertiesCardComponentType> = (props) => {
         className="el-box-shadow"
         onMouseEnter={(e) => cardOnHover(e)}
         onMouseLeave={(e) => cardNotOnHover(e)}
+        onClick={() => history.push(`property/${props.propertyData.id!}`)}
       >
         <PropertyImage
           {...props}

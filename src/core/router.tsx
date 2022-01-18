@@ -42,6 +42,9 @@ const AuthenticatedPage = React.lazy(() =>
 const MarketPlacePage = React.lazy(() =>
   catchChunkError(() => import('../components/pages/marketplace'))
 )
+const PropertyPage = React.lazy(() =>
+  catchChunkError(() => import('../components/pages/property'))
+)
 
 const Router = () => (
   <BrowserRouter history={history}>
@@ -50,6 +53,10 @@ const Router = () => (
         <Route path={Routes.LOGIN} component={LoginPage} />
         <PrivateRouteWrapper>
           <Switch>
+            <Route
+              path={`${Routes.PROPERTY_PAGE}/:propertyId`}
+              component={PropertyPage}
+            />
             <Route path={Routes.MARKET_PLACE} component={MarketPlacePage} />
             <Route exact path={Routes.HOME} component={AuthenticatedPage} />
           </Switch>
