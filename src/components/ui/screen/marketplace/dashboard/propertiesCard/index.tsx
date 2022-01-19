@@ -44,15 +44,16 @@ const PropertiesCardComponent: FC<PropertiesCardComponentType> = (props) => {
         className="el-box-shadow"
         onMouseEnter={(e) => cardOnHover(e)}
         onMouseLeave={(e) => cardNotOnHover(e)}
-        onClick={() => history.push(`property/${props.propertyData.id!}`)}
       >
         <PropertyImage
           {...props}
           toggleMarketingMode={toggleMarketingMode}
           currentMarketingMode={isMarketingModeEqualToSelling}
         />
-
-        <div className="el-pt2 el-pb4 el-px6">
+        <div
+          className="el-pt2 el-pb4 el-px6"
+          onClick={() => history.push(`property/${props.propertyData.id!}`)}
+        >
           <FlexContainer isFlexJustifyBetween>
             <div className="el-py2">
               <TitleCardProperty
