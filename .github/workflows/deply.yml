@@ -1,0 +1,48 @@
+name: Deploy with Reapit cli
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+  REAPIT_API_KEY: ${{secrets.REAPIT_API_KEY}}
+  PIPELINE_ID: ${{secrets.PIPELINE_ID}}
+
+  CI: true
+
+jobs:
+  deploy-with-reapit-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: Install
+        run: yarn
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Build
+        run: |
+          yarn build
+
+      - name: Deploy
+        run: |
+          echo $PIPELINE_ID &&
+          yarn reapit pipeline deploy-zip $PIPELINE_ID -y
+        env:
+          PIPELINE_ID: ${{secrets.PIPELINE_ID}}
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'master'
