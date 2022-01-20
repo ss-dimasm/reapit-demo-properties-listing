@@ -1,15 +1,21 @@
 import React from 'react'
-import { Title } from '@reapit/elements'
-import { floorPlanImage } from './__style__/floorPlanSection.style'
+import { BodyText, Title } from '@reapit/elements'
+import { FiExternalLink } from 'react-icons/fi'
 
+import {
+  floorPlanWrapper,
+  floorPlanText,
+} from './__style__/floorPlanSection.style'
 const FloorPlanSection = () => {
   return (
     <>
       <Title>Floor Plan</Title>
-      <img
-        className={floorPlanImage}
-        src="https://images.homify.com/image/upload/a_0,c_fit,f_auto,q_auto,w_1108/v1539503219/p/photo/image/2748239/3D_Floor_Plan_Rendering_Sample.jpg"
-      />
+      <div className={floorPlanWrapper}>
+        <BodyText hasNoMargin className={floorPlanText}>
+          Open Floor Plan
+        </BodyText>
+        <FiExternalLink color="var(--color-grey-dark)" />
+      </div>
     </>
   )
 }

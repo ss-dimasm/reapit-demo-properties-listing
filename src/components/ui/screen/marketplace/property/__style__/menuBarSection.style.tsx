@@ -4,6 +4,8 @@ export const menuBarWrapper = css`
   position: sticky;
   top: 0px;
   width: 100%;
+  background-color: var(--color-white);
+  z-index: 99999;
 `
 
 export const menuBarSubWrapper = css`

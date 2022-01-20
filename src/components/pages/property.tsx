@@ -25,6 +25,7 @@ import NearbySection from '../ui/screen/marketplace/property/nearbySection'
 import YouMayLikeSection from '../ui/screen/marketplace/property/youMayLikeSection'
 import AgentSection from '../ui/screen/marketplace/property/agentSection'
 import PriceHistorySection from '../ui/screen/marketplace/property/priceHistorySection'
+import SectionBreak from '../ui/sectionBreak'
 
 // Declare type of useParams
 interface ParamsType {
@@ -65,17 +66,22 @@ const Property: FC<PropertyProps> = (): ReactElement => {
             <FlexContainer isFlexJustifyBetween>
               <div className={mainContentLeft}>
                 <OverviewSection />
+                <SectionBreak />
                 <FeaturesSection />
+                <SectionBreak />
                 <FloorPlanSection />
-                <PriceHistorySection />
+                <SectionBreak />
+                <PriceHistorySection propertyData={data} />
               </div>
               <aside className={mainContentRight}>
                 <AgentSection />
               </aside>
             </FlexContainer>
+            <SectionBreak />
           </div>
         </FlexContainer>
-        <NearbySection />
+        <NearbySection propertyData={data} />
+        <SectionBreak />
         <AppointmentSection />
         <YouMayLikeSection />
       </div>

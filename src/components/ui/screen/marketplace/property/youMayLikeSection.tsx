@@ -1,10 +1,15 @@
 import React from 'react'
-import { Title } from '@reapit/elements'
+import { FlexContainer, Title } from '@reapit/elements'
+import { centerBar } from '../../../../pages/__styles__/property.style'
 
 const YouMayLikeSection = () => {
   return (
     <>
-      <Title>You may like</Title>
+      <FlexContainer isFlexJustifyCenter className="el-mt10">
+        <div className={centerBar}>
+          <Title>You may like</Title>
+        </div>
+      </FlexContainer>
     </>
   )
 }

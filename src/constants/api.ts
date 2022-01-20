@@ -12,4 +12,7 @@ export const URLS = {
   PROPERTIES_IMAGE: {
     PAGED: '/propertyImages',
   },
+  OFFERS: {
+    PAGED: '/offers',
+  },
 }
