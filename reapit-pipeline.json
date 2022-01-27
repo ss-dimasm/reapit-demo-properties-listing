@@ -1,0 +1,10 @@
+{
+  "id": "eefe929e-5c49-48de-bd22-9c8ba421d8bd",
+  "appId": "eefe929e-5c49-48de-bd22-9c8ba421d8bd",
+  "subDomain": "peaceful-coat",
+  "packageManager": "yarn",
+  "repospitory": "https://github.com///github.com/ss-dimasm/reapit-demo-properties-listing",
+  "buildDir": "build",
+  "outDir": "build",
+  "developerId": "23c2c185-4a9c-4104-9417-5f3dabf258c8"
+}
